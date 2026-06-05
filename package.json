@@ -1,0 +1,43 @@
+{
+  "name": "zero-lucid",
+  "version": "0.1.0",
+  "description": "Adonis Lucid database adapter for Zero server mutators",
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsc",
+    "test": "vitest run",
+    "test:watch": "vitest"
+  },
+  "peerDependencies": {
+    "@adonisjs/lucid": ">=22",
+    "@rocicorp/zero": ">=1.5"
+  },
+  "devDependencies": {
+    "@adonisjs/lucid": "^22.4.2",
+    "@rocicorp/zero": "^1.5.0",
+    "@types/pg": "^8.11.0",
+    "typescript": "^5.0.0",
+    "vitest": "^3.0.0"
+  },
+  "keywords": [
+    "zero",
+    "rocicorp",
+    "lucid",
+    "adonisjs",
+    "database",
+    "adapter",
+    "orm"
+  ],
+  "license": "MIT"
+}
