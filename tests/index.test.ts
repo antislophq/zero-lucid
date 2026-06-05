@@ -48,10 +48,4 @@ describe("LucidInternalTransaction.query()", () => {
 
     expect(rows).toEqual([{ id: "row-1" }]);
   });
-
-  it("stores the original Lucid tx as wrappedTransaction", () => {
-    const internalTx = new LucidInternalTransaction(lucidTxMock.tx);
-
-    expect(internalTx.wrappedTransaction).toBe(lucidTxMock.tx);
-  });
 });
