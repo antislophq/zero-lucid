@@ -48,4 +48,36 @@ describe("LucidInternalTransaction.query()", () => {
 
     expect(rows).toEqual([{ id: "row-1" }]);
   });
+
+  it("passes through SQL with no placeholders unchanged", async () => {
+    const internalTx = new LucidInternalTransaction(lucidTxMock.tx);
+
+    await internalTx.query("SELECT 1", []);
+
+    expect(lucidTxMock.rawQuery).toHaveBeenCalledWith("SELECT 1", []);
+  });
+
+  it("handles repeated use of the same placeholder", async () => {
+    const internalTx = new LucidInternalTransaction(lucidTxMock.tx);
+
+    await internalTx.query("SELECT $1, $1", ["value"]);
+
+    expect(lucidTxMock.rawQuery).toHaveBeenCalledWith("SELECT ?, ?", ["value", "value"]);
+  });
+
+  it("throws TypeError for $0 (index below 1)", async () => {
+    const internalTx = new LucidInternalTransaction(lucidTxMock.tx);
+
+    await expect(internalTx.query("SELECT $0", ["x"])).rejects.toThrow(
+      "Missing binding for $0",
+    );
+  });
+
+  it("does not rewrite $ not followed by digits", async () => {
+    const internalTx = new LucidInternalTransaction(lucidTxMock.tx);
+
+    await internalTx.query("SELECT '$notaplaceholder'", []);
+
+    expect(lucidTxMock.rawQuery).toHaveBeenCalledWith("SELECT '$notaplaceholder'", []);
+  });
 });
