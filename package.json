@@ -1,5 +1,5 @@
 {
-  "name": "zero-lucid",
+  "name": "@antislop/zero-lucid",
   "version": "0.1.0",
   "description": "Adonis Lucid database adapter for Zero server mutators",
   "type": "module",
